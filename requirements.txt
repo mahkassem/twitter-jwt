@@ -6,3 +6,4 @@ Flask-SQLAlchemy==2.5.1
 psycopg2-binary==2.9.6
 SQLAlchemy==1.4.17
 psycopg2==2.9.6
+pyjwt==2.1.0

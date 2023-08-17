@@ -1,9 +1,7 @@
 from flask import Blueprint, jsonify, abort, request
 from flask import current_app as app
-from ..models import User, db, Tweet, likes_table
+from ..models import User, db
 import hashlib
-import secrets
-
 
 # Define a function to hash and salt the given password
 

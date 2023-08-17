@@ -3,7 +3,6 @@ from flask import Blueprint, jsonify, abort, request
 from flask import current_app as app
 from ..models import User
 import hashlib
-import secrets
 import jwt
 
 
