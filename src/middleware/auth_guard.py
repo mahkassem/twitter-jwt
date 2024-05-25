@@ -12,6 +12,7 @@ def auth_guard(f):
         token = None
 
         # Check if 'Authorization' header is present
+        # Authorization: Brearer <token>
         if "Authorization" in request.headers:
             # If present, get the token
             token = request.headers["Authorization"].split(" ")[1]
@@ -20,7 +21,11 @@ def auth_guard(f):
             return abort(401, "Unauthorized")
 
         # Decode the token
-        token = jwt.decode(token, app.config["SECRET_KEY"], algorithms=["HS256"])
+        try:
+            token = jwt.decode(token, app.config["SECRET_KEY"], algorithms=["HS256"])
+        except:
+            # If token is invalid, return 401 Unauthorized
+            return abort(401, "Invalid token")
 
         # Get the user with the given id
         user = User.query.get(token["id"])

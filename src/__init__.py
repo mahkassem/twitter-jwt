@@ -1,19 +1,20 @@
 import os
 from flask import Flask
 from flask_migrate import Migrate
+from dotenv import load_dotenv
 
 # https://flask.palletsprojects.com/en/2.0.x/patterns/appfactories/
-
+load_dotenv()
 
 def create_app(test_config=None):
     app = Flask(__name__, instance_relative_config=True)
-    secret_key = os.environ.get('SECRET_KEY') or 'secret'
     app.config.from_mapping(
-        SECRET_KEY=secret_key,
-        SQLALCHEMY_DATABASE_URI='postgresql://postgres@localhost:5432/twitter',
+        SECRET_KEY=os.environ.get('SECRET_KEY'),
+        SQLALCHEMY_DATABASE_URI=os.environ.get('SQLALCHEMY_DATABASE_URI'),
         SQLALCHEMY_TRACK_MODIFICATIONS=False,
         SQLALCHEMY_ECHO=True
     )
+    app.debug = True
 
     if test_config is None:
         # load the instance config, if it exists, when not testing
@@ -33,8 +34,8 @@ def create_app(test_config=None):
     migrate = Migrate(app, db)
 
     from .api import auth, users, tweets
-    app.register_blueprint(auth.bp)
-    app.register_blueprint(users.bp)
-    app.register_blueprint(tweets.bp)
+    app.register_blueprint(auth.bp) # /auth
+    app.register_blueprint(users.bp) # /users
+    app.register_blueprint(tweets.bp) # /tweets
 
     return app

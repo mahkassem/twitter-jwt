@@ -7,7 +7,8 @@ bp = Blueprint('tweets', __name__, url_prefix='/tweets')
 
 
 @bp.route('', methods=['GET'])  # decorator takes path and list of HTTP verbs
-def index():
+@auth_guard
+def index(user: User):
     tweets = Tweet.query.all()  # ORM performs SELECT query
     result = []
     for t in tweets:
