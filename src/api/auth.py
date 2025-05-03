@@ -40,7 +40,7 @@ def login():
         return abort(401, "invalid password")
     # Create a token for the user (JWT)
     token = jwt.encode(
-        {"id": user.id},  # payload
+        {"id": user.id, "name": user.username},  # payload
         app.config["SECRET_KEY"],  # secret key
         algorithm="HS256",  # algorithm
     )

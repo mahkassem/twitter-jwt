@@ -7,8 +7,8 @@ import string
 import hashlib
 import secrets
 from faker import Faker
-from twitter.src.models import User, Tweet, likes_table, db
-from twitter.src import create_app
+from src.models import User, Tweet, likes_table, db
+from src import create_app
 
 USER_COUNT = 50
 TWEET_COUNT = 100
