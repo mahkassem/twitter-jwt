@@ -17,6 +17,9 @@ source venv/bin/activate
 # Install dependencies
 pip install -r requirements.txt
 
+# Create .env file
+mv .env.example .env
+
 # Migration
 flask db upgrade
 
@@ -26,6 +29,8 @@ python seed.py
 # Run the application
 flask run
 ```
+
+> don't forget to update .env file with your evironment variables
 
 ## Structure
 
@@ -42,4 +47,6 @@ flask run
 ├── seed.py
 ├── requirements.txt
 ├── wsgi.py
+├── .env
+
 ```
