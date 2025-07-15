@@ -1,8 +1,7 @@
 """ JWT Authentication """
 import jwt
 from functools import wraps
-from flask import request, abort
-from flask import current_app as app
+from flask import request, abort, current_app as app
 from ..models import User
 
 

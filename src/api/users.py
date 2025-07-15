@@ -21,8 +21,8 @@ def index():
 
 @bp.route('/<int:id>', methods=['GET'])
 def show(id: int):
-    t = User.query.get_or_404(id, "Users not found")
-    return jsonify(t.serialize())
+    u = User.query.get_or_404(id, "Users not found")
+    return jsonify(u.serialize())
 
 @bp.route('', methods=['POST'])
 def create():
@@ -48,7 +48,7 @@ def create():
     db.session.add(u)  # prepare CREATE statement
     db.session.commit()  # execute CREATE statement
 
-    return jsonify(u .serialize())
+    return jsonify(u.serialize())
 
 
 
